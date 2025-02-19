@@ -1,4 +1,4 @@
-package com.order_service.order_service.config;
+package com.inventory.config;
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -9,15 +9,16 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenAPIConfig {
+
     @Bean
-    public OpenAPI orderServiceAPI() {
+    public OpenAPI inventoryServiceAPI() {
         return new OpenAPI()
-                .info(new Info().title("Order Service API")
-                        .description("This is the REST API for Order Service")
+                .info(new Info().title("inventory Service API")
+                        .description("This is the REST API for inventory Service")
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("You can refer to the Order Service Wiki Documentation")
-                        .url("https://Order-service-dummy-url.com/docs"));
+                        .description("You can refer to the inventory Service Wiki Documentation")
+                        .url("https://inventory-service-dummy-url.com/docs"));
     }
 }
