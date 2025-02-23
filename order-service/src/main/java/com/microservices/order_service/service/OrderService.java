@@ -1,10 +1,10 @@
-package com.order_service.order_service.service;
+package com.microservices.order_service.service;
 
-import com.order_service.order_service.client.InventoryClient;
-import com.order_service.order_service.dto.OrderRequest;
-import com.order_service.order_service.event.OrderPlacedEvent;
-import com.order_service.order_service.model.Order;
-import com.order_service.order_service.repository.OrderRepository;
+import com.microservices.order_service.client.InventoryClient;
+import com.microservices.order_service.dto.OrderRequest;
+import com.microservices.order_service.order.event.OrderPlacedEvent;
+import com.microservices.order_service.model.Order;
+import com.microservices.order_service.repository.OrderRepository;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

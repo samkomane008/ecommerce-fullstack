@@ -1,4 +1,4 @@
-package com.order_service.order_service;
+package com.microservices.order_service;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;

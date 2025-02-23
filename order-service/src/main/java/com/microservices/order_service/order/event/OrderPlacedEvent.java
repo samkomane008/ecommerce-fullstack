@@ -1,4 +1,4 @@
-package com.order_service.order_service.event;
+package com.microservices.order_service.order.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

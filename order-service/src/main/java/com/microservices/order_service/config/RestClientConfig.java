@@ -1,7 +1,7 @@
-package com.order_service.order_service.config;
+package com.microservices.order_service.config;
 
 
-import com.order_service.order_service.client.InventoryClient;
+import com.microservices.order_service.client.InventoryClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

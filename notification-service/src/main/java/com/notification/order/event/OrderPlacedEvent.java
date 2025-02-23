@@ -1,4 +1,4 @@
-package com.notification.order;
+package com.notification.order.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

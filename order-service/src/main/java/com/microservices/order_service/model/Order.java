@@ -1,4 +1,4 @@
-package com.order_service.order_service.model;
+package com.microservices.order_service.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
