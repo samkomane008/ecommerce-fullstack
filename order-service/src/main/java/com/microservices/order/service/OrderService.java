@@ -2,6 +2,7 @@ package com.microservices.order.service;
 
 import com.microservices.order.client.InventoryClient;
 import com.microservices.order.dto.OrderRequest;
+import com.microservices.notification.OrderPlacedEvent;
 import com.microservices.order.model.Order;
 import com.microservices.order.repository.OrderRepository;
 import groovy.util.logging.Slf4j;

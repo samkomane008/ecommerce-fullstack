@@ -1,5 +1,6 @@
 package com.notification;
 
+import com.microservices.notification.NotificationServiceApplication;
 import org.springframework.boot.SpringApplication;
 
 public class TestNotificationServiceApplication {
