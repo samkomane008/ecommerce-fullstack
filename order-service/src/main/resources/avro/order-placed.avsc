@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "OrderPlacedEvent",
-  "namespace": "com.order_service.order_service.event;",
+  "namespace": "com.microservices.order.event;;",
   "fields": [
     { "name": "orderNumber", "type": "string" },
     { "name": "email", "type": "string" },

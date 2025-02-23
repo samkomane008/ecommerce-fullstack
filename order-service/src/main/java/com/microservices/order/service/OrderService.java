@@ -1,10 +1,9 @@
-package com.microservices.order_service.service;
+package com.microservices.order.service;
 
-import com.microservices.order_service.client.InventoryClient;
-import com.microservices.order_service.dto.OrderRequest;
-import com.microservices.order_service.order.event.OrderPlacedEvent;
-import com.microservices.order_service.model.Order;
-import com.microservices.order_service.repository.OrderRepository;
+import com.microservices.order.client.InventoryClient;
+import com.microservices.order.dto.OrderRequest;
+import com.microservices.order.model.Order;
+import com.microservices.order.repository.OrderRepository;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -37,8 +36,11 @@ public class OrderService {
             orderRepository.save(order);
 
             // send the message to kafka topic
-            var orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), orderRequest.userDetails().email(),
-                    orderRequest.userDetails().firstName(), orderRequest.userDetails().lastName());
+           OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent();
+           orderPlacedEvent.setOrderNumber(order.getOrderNumber());
+           orderPlacedEvent.setEmail(orderRequest.userDetails().email());
+           orderPlacedEvent.setFirstName(orderRequest.userDetails().firstName());
+           orderPlacedEvent.setLastName(orderRequest.userDetails().lastName());
 
             log.info("Start- Sending OrderPlacedEvent {} to Kafka Topic", orderPlacedEvent);
             kafkaTemplate.send("order-placed", orderPlacedEvent);

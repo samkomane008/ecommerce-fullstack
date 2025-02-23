@@ -1,4 +1,4 @@
-package com.microservices.order_service.client;
+package com.microservices.order.client;
 
 import groovy.util.logging.Slf4j;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
