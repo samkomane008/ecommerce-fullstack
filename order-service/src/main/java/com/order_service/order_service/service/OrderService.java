@@ -2,12 +2,14 @@ package com.order_service.order_service.service;
 
 import com.order_service.order_service.client.InventoryClient;
 import com.order_service.order_service.dto.OrderRequest;
+import com.order_service.order_service.event.OrderPlacedEvent;
 import com.order_service.order_service.model.Order;
 import com.order_service.order_service.repository.OrderRepository;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -33,12 +35,11 @@ public class OrderService {
             order.setSkuCode(orderRequest.skuCode());
             order.setQuantity(orderRequest.quantity());
             orderRepository.save(order);
-            var orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), orderRequest.userDetails()
-                    .email(),
-                    orderRequest.userDetails()
-                            .firstName(),
-                    orderRequest.userDetails()
-                            .lastName());
+
+            // send the message to kafka topic
+            var orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), orderRequest.userDetails().email(),
+                    orderRequest.userDetails().firstName(), orderRequest.userDetails().lastName());
+
             log.info("Start- Sending OrderPlacedEvent {} to Kafka Topic", orderPlacedEvent);
             kafkaTemplate.send("order-placed", orderPlacedEvent);
             log.info("End- Sending OrderPlacedEvent {} to Kafka Topic", orderPlacedEvent);

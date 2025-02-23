@@ -3,9 +3,8 @@ package com.order_service.order_service.dto;
 import java.math.BigDecimal;
 
 public record OrderRequest(Long id, String orderNumber, String skuCode,
-                           BigDecimal price, Integer quantity) {
+                           BigDecimal price, Integer quantity, UserDetails userDetails) {
 
-    record UserDetails (String orderNumber, UserDetails userDetails){
-    }
+    public record UserDetails (String email, String firstName, String lastName) {}
 
 }
