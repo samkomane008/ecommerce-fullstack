@@ -1,5 +1,6 @@
 package com.notification.service;
 
+import com.notification.order.OrderPlacedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class NotificationService {
+
     private final JavaMailSender javaMailSender;
 
     @KafkaListener(topics = "order-placed")
@@ -21,7 +23,7 @@ public class NotificationService {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("springshop@email.com");
-            messageHelper.setTo(orderPlacedEvent.getEmail().toString());
+            messageHelper.setTo(orderPlacedEvent.getEmail());
             messageHelper.setSubject(String.format("Your Order with OrderNumber %s is placed successfully", orderPlacedEvent.getOrderNumber()));
             messageHelper.setText(String.format("""
                             Hi %s,%s
@@ -31,13 +33,13 @@ public class NotificationService {
                             Best Regards
                             Spring Shop
                             """,
-                    orderPlacedEvent.getFirstName().toString(),
-                    orderPlacedEvent.getLastName().toString(),
+                    orderPlacedEvent.getFirstName(),
+                    orderPlacedEvent.getLastName(),
                     orderPlacedEvent.getOrderNumber()));
         };
         try {
             javaMailSender.send(messagePreparator);
-            log.info("Order Notifcation email sent!!");
+            log.info("Order Notification email sent!!");
         } catch (MailException e) {
             log.error("Exception occurred when sending mail", e);
             throw new RuntimeException("Exception occurred when sending mail to springshop@email.com", e);
